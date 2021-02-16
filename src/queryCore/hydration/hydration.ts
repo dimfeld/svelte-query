@@ -18,6 +18,7 @@ export interface DehydrateOptions {
 }
 
 export interface HydrateOptions {
+  client?: QueryClient
   defaultOptions?: {
     queries?: QueryOptions
     mutations?: MutationOptions

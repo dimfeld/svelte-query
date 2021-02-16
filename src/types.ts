@@ -1,6 +1,7 @@
 import type { Readable } from "svelte/store";
 import type {
   MutateOptions,
+  QueryClient,
   QueryObserverOptions,
   QueryObserverResult,
   QueryFunction, QueryKey, MutationStatus, MutationKey, MutationFunction,
@@ -28,7 +29,9 @@ export interface UseQueryOptions<
   TError = unknown,
   TData = TQueryFnData,
   TQueryData = TQueryFnData
-  > extends QueryObserverOptions<TQueryFnData, TError, TData, TQueryData> { }
+  > extends QueryObserverOptions<TQueryFnData, TError, TData, TQueryData> {
+  client?: QueryClient
+}
 
 export type UseQueryResult<TData = unknown, TError = unknown> = QueryObserverResult<TData, TError>
 
@@ -56,7 +59,9 @@ export interface UseInfiniteQueryOptions<
   TError,
   TData,
   TQueryData
-  > { }
+  > {
+  client?: QueryClient 
+}
 
 export type UseInfiniteQueryResult<TData = unknown, TError = unknown> = InfiniteQueryObserverResult<TData, TError>
 
@@ -76,6 +81,7 @@ export interface MutationStoreResult<
 }
 
 export interface UseMutationOptions<TData, TError, TVariables, TContext> {
+  client?: QueryClient
   mutationKey?: string | unknown[]
   onMutate?: (variables: TVariables) => Promise<TContext> | TContext
   onSuccess?: (

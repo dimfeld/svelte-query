@@ -5,9 +5,10 @@ import { useQueryClient } from "../queryClientProvider";
 import type { UseQueryOptions } from "../types";
 
 export default function useQueries(
-    queries: UseQueryOptions[]
+    queries: UseQueryOptions[],
+    client?: QueryClient
 ) {
-    const client: QueryClient = useQueryClient();
+    client = client ?? useQueryClient()
     const observer = new QueriesObserver(client, queries);
 
     const { subscribe } = readable(observer.getCurrentResult(), (set) => {

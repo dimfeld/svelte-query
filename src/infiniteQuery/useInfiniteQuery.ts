@@ -40,7 +40,7 @@ export default function useInfiniteQuery<TQueryFnData, TError, TData = TQueryFnD
     arg3?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
 ): UseInfiniteQueryStoreResult<TQueryFnData, TError, TData> {
     const options = parseQueryArgs(arg1, arg2, arg3)
-    const client: QueryClient = useQueryClient()
+    const client: QueryClient = options.client ?? useQueryClient()
     let defaultedOptions = client.defaultQueryObserverOptions(options)
     // Include callbacks in batch renders
     defaultedOptions = setBatchCalls<UseInfiniteQueryOptions<TQueryFnData, TError, TData>>(defaultedOptions)

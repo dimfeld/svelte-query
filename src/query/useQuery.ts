@@ -35,7 +35,7 @@ export default function useQuery<TQueryFnData = unknown, TError = unknown, TData
     arg3?: UseQueryOptions<TQueryFnData, TError, TData>
 ): UseQueryStoreResult<TQueryFnData, TError, TData> {
     const options = parseQueryArgs(arg1, arg2, arg3)
-    const client: QueryClient = useQueryClient()
+    const client: QueryClient = options.client ?? useQueryClient()
     let defaultedOptions = client.defaultQueryObserverOptions(options)
     // Include callbacks in batch renders
     defaultedOptions = setBatchCalls<UseQueryOptions<TQueryFnData, TError, TData>>(defaultedOptions)
